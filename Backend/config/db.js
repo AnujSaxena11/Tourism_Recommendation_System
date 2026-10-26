@@ -1,4 +1,4 @@
-const {Sequelize} = require('sequelize');
+const {Sequelize} = module.require('sequelize');
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: "postgres",
@@ -11,8 +11,8 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
 });
 
 
-const userAuthModel = require('../models/userAuth');
-const authSessionModel = require('../models/authSessions');
+const userAuthModel = require('../authModule/auth.model');
+const authSessionModel = require('../authModule/sessions.model');
 
 const userAuth = sequelize.define('UserAuth', userAuthModel, { timestamps: true });
 const authSession = sequelize.define('authSession', authSessionModel, { timestamps: true });
