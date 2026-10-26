@@ -19,7 +19,7 @@ const {
     getMe,
     getCsrfToken,
     googleOauthCallback
-} = require("../controllers/authHandler");
+} = require("./auth.controller.js");
 const { signUpSchema, loginSchema, forgetPasswordSchema, verifyOTPSchema } = require("../validations/AuthValidator");
 const { ipKey, emailKey, userKey, refreshTokenKey } = require("../utils/rateLimiterKeys");
 

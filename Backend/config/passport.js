@@ -1,6 +1,5 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const bcrypt = require("bcrypt");
-const { userAuth } = require("./db");
 const crypto = require("node:crypto");
 
 async function initializePassport(passport){
