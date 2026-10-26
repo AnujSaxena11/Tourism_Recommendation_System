@@ -7,11 +7,11 @@ require("dotenv").config();
 
 const passport = require("passport");
 const initializePassport = require("./config/passport");
-const { connectRedis } = module.require("./config/redis");
-const { connectDB } = module.require("./config/db");
+const { connectRedis } = require("./config/redis");
+const { connectDB } = require("./config/db");
 const errorHandler = require("./middlewares/errorHandler");
 
-const authRoutes = module.require("./authModule/auth.route");
+const authRoutes = require("./authModule/auth.route");
 
 if(process.env.NODE_ENV === "production") app.set("trust proxy", 1);
 
