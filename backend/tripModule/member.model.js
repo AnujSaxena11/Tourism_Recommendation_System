@@ -15,4 +15,4 @@ const TripMembers = {
     }
 }
 
-module.export = TripMembers;
+module.exports = TripMembers;

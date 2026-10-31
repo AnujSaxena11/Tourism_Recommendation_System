@@ -14,11 +14,11 @@ const Trip = {
         allowNull: false
     },
     startDate:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     endDate:{
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     totalDays:{
@@ -31,11 +31,11 @@ const Trip = {
     },
     budgetId:{
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     destinationId:{
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     isPublic:{
         type: DataTypes.BOOLEAN,

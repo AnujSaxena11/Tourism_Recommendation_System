@@ -12,6 +12,8 @@ const { connectDB } = require("./config/db");
 const errorHandler = require("./middlewares/errorHandler");
 
 const authRoutes = require("./authModule/auth.route");
+const tripRoutes = require("./tripModule/trip.route");
+const requestRoutes = require("./tripModule/request.route");
 
 if(process.env.NODE_ENV === "production") app.set("trust proxy", 1);
 
@@ -38,6 +40,8 @@ const startServer = async () => {
     await connectRedis();
 
     app.use("/api/auth", authRoutes);
+    app.use("/api/trip", tripRoutes);
+    app.use('/api/request', requestRoutes);
     app.use(errorHandler);
 
     const server = http.createServer(app);

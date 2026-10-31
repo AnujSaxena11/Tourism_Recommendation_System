@@ -9,10 +9,10 @@ const TripJoinRequests = {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    status:{
-        type: DataTypes.ENUM("accepted", "pending"),
-        defaultValue: "pending"
+    type:{
+        type: DataTypes.ENUM("code", "public"),
+        defaultValue: "code"
     }
 }
 
-module.export = TripJoinRequests;
+module.exports = TripJoinRequests;
