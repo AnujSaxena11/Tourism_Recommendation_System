@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const sendEmail = require("../utils/sendMail");
 const crypto = require('node:crypto');
 const asyncHandler = require("../utils/asyncHandler");
-const UAParser = module.require("ua-parser-js");
+const UAParser = require("ua-parser-js");
 const { createCsrfToken, setCsrfCookie } = require("../utils/csrfToken");
 
 const accessSecret = process.env.ACCESS_TOKEN_SECRET;
