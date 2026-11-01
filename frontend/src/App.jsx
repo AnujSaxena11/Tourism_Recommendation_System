@@ -1,122 +1,71 @@
+import './index.css'
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import LoadingScreen from './components/LoadingScreen'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import Destinations from './components/Destinations'
+import Features from './components/Features'
+import TripPlanner from './components/TripPlanner'
+import CommunityTrips from './components/CommunityTrips'
+import CTASection from './components/CTASection'
+import Footer from './components/Footer'
+import AuthPage from './pages/AuthPage'
+import { useScrollReveal, useParallax } from './hooks/useScrollReveal'
 
-function App() {
-  const [count, setCount] = useState(0)
+function LandingPage() {
+  const [isLoading, setIsLoading] = useState(true)
+  useScrollReveal()
+  useParallax()
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen bg-[#003049] font-sans selection:bg-[#F5B82E] selection:text-slate-900">
+      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+      
+      {/* ─── FIXED DOCK NAVBAR ─── */}
+      <Navbar />
 
-      <div className="ticks"></div>
+      <main>
+        {/* ─── SECTION 01: HERO + STATS STRIP ─── */}
+        <Hero />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        {/* ─── SECTION 02: EXPLORE DESTINATIONS (CREAM) ─── */}
+        <Destinations />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+        {/* ─── SECTION 03: PLAN SMARTER WITH AI (NAVY) ─── */}
+        <Features />
+
+        {/* ─── SECTION 04: A COMPLETE TRIP PLANNER (CREAM) ─── */}
+        <TripPlanner />
+
+        {/* ─── SECTION 05: TRAVEL TOGETHER. MAKE BETTER STORIES (NAVY) ─── */}
+        <CommunityTrips />
+
+        {/* ─── SECTION 06: THE WORLD IS WAITING. LET'S GO (FINAL SCENIC CTA) ─── */}
+        <CTASection />
+      </main>
+
+      {/* ─── SECTION 07: FOOTER (NAVY) ─── */}
+      <Footer />
+    </div>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Landing Page Route */}
+        <Route path="/" element={<LandingPage />} />
+
+        {/* Dedicated Route-based Authentication */}
+        <Route path="/signin" element={<AuthPage initialMode="signin" />} />
+        <Route path="/login" element={<AuthPage initialMode="signin" />} />
+        <Route path="/signup" element={<AuthPage initialMode="signup" />} />
+
+        {/* Fallback to Home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
